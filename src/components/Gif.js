@@ -8,13 +8,13 @@ const Gif = ({gif, setGif}) => {
 
     return (
         
-        <div className="col s12 m6 l4">
+        <div className="col s12 m7 l4">
 
             <div className="card">
 
                 <div className="card-image">
 
-                    <a href="#!" onClick={select}>
+                    <a href="#!">
                         
                         <img src={url} alt={title}/>
                         

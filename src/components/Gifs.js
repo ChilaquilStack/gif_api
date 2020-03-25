@@ -5,15 +5,14 @@ const Gifs = ({gifs, setGif}) => (
 
     <div className="row">
 
-        {gifs.length ? gifs.map(gif => (
+        {gifs.map(gif => (
             
             <Gif 
                 gif={gif}
                 key={gif.id}
                 setGif={setGif}
             />
-        
-        )) : <p>No gifs</p>}
+        ))}
 
     </div>
 )
