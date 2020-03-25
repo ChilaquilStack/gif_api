@@ -2,10 +2,15 @@ import React, {Fragment, useState, useEffect} from 'react';
 import Gifs from './components/Gifs'
 import Form from './components/Form'
 import Header from './components/Header'
+import Paginator from './components/Paginator'
+import Preloader from './components/Preloader'
+import 'materialize-css/dist/css/materialize.min.css';
 
 function App() {
 
   const gifsPerPage = 30
+
+  const [showPreloader, setPreloader] = useState(false)
 
   const [gifs, setGifs] = useState([])
 
@@ -19,29 +24,35 @@ function App() {
 
   useEffect(() => {
 
+    if(!name) return
+
     const getGifs = async () => {
 
-        const api_key = 'mkQkcuGKSxsbg1UVv9EQDREPs5MKsPvM'
+      setPreloader(true)
 
-        const url = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&q=${name}&limit=${gifsPerPage}&offset=${currentPage}`
+      const api_key = 'mkQkcuGKSxsbg1UVv9EQDREPs5MKsPvM'
 
-        try {
-            
-          const response = await fetch(url)
+      const url = `https://api.giphy.com/v1/gifs/search?api_key=${api_key}&q=${name}&limit=${gifsPerPage}&offset=${currentPage}`
 
-          const {data, pagination} = await response.json()
+      try {
           
-          const calcTotalPages = Math.ceil(pagination.total_count / gifsPerPage) 
+        const response = await fetch(url)
+
+        const {data, pagination} = await response.json()
+        
+        const calcTotalPages = Math.ceil(pagination.total_count / gifsPerPage) 
+        
+        setGifs(data)
+
+        setTotalPages(calcTotalPages)
+
+      } catch (error) {
+
+        console.error(error)
           
-          setGifs(data)
+      }
 
-          setTotalPages(calcTotalPages)
-
-        } catch (error) {
-
-          console.error(error)
-            
-        }
+      setPreloader(false)
 
     }
 
@@ -53,6 +64,9 @@ function App() {
 
 }, [name, currentPage])
 
+  const showBackButton=currentPage === 0 || name === ''
+
+  const showNextButton=currentPage === totalPages || name === ''
 
   const backPage = () => {
     
@@ -74,45 +88,27 @@ function App() {
 
     <Fragment>
 
-      <Header
-        title="Buscador de Gifs"
-      />
+      <Header title="Search Gifs"/>
 
       <main className="container white">
-        
+
         <Form setName={setName}/>
+        
+        {showPreloader ? <Preloader/> : <Gifs gifs={gifs} setGif={setGif}/>}
 
-        <Gifs gifs={gifs} setGif={setGif}/>
-
-        <div className="row">
-
-          <div class="input-field col s6">
-            
-            <div className="left-align">
-
-              { (currentPage === 0 || name === '') ? null : <a class="waves-effect waves-light btn" onClick={backPage}> &laquo; Back </a>}
-
-            </div>
-      
-          </div> 
-            
-          <div class="input-field col s6">
-
-            <div className="right-align">
-
-              { (currentPage === totalPages || name === '') ? null : <a class="waves-effect waves-light btn" onClick={nextPage}>Next &raquo;</a>}
-
-            </div>
-            
-          </div>
-          
-        </div>
+        <Paginator
+          nextPage={nextPage} 
+          backPage={backPage} 
+          showBackButton={showBackButton} 
+          showNextButton={showNextButton}
+        />
 
       </main>
 
     </Fragment>
 
-  );
+  )
+
 }
 
 export default App;

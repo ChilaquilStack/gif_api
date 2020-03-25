@@ -12,6 +12,7 @@ const Gifs = ({gifs, setGif}) => (
                 key={gif.id}
                 setGif={setGif}
             />
+        
         ))}
 
     </div>

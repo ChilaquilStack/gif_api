@@ -1,10 +1,15 @@
 import React from 'react'
 
 import styles from './Form.module.css'
+import M from "materialize-css";
 
 const Form = ({setName}) => {
 
     const handleChange = (e) => {
+
+        const  elems = document.querySelectorAll('.autocomplete');
+        
+        M.Autocomplete.init(elems);
         
         const {target : {value}} = e
         
@@ -20,17 +25,17 @@ const Form = ({setName}) => {
 
                 <form>
 
-                    <h2 className={styles.heading}>Encuentra Gifs</h2>
-
                     <div className="input-field col-s12">
 
                         <input
                             type="text"
                             name="name"
                             onChange={handleChange}
-                            placeholder="search"
-                            className={`${styles.btn_block} btn-large amber darken-2`}
+                            className={`${styles.btn_block} autocomplete`}
+                            id="autocomplete-input"
                         />
+
+                        <label for="autocomplete-input">Please search a gif...</label>
 
                     </div>
 
