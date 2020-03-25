@@ -1,6 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import Gifs from './components/Gifs'
 import Form from './components/Form'
+import Error from './components/Error'
 import Header from './components/Header'
 import Paginator from './components/Paginator'
 import Preloader from './components/Preloader'
@@ -10,21 +11,40 @@ function App() {
 
   const gifsPerPage = 30
 
-  const [showPreloader, setPreloader] = useState(false)
-
-  const [gifs, setGifs] = useState([])
-
   const [gif, setGif] = useState({})
-
+  
+  const [gifs, setGifs] = useState([])
+  
   const [name, setName] = useState('')
 
-  const [currentPage, setCurrentPage] = useState(0)
+  const [error, setError] = useState(false)
+
+  const [message, setMessage] = useState('')
   
   const [totalPages, setTotalPages] = useState(0)
+  
+  const [currentPage, setCurrentPage] = useState(0)
+  
+  const [showPreloader, setPreloader] = useState(false)
 
   useEffect(() => {
 
-    if(!name) return
+    const reset = () => {
+
+      setCurrentPage(0)
+
+      setError(false)
+
+      setMessage('')
+      
+      setGifs([])
+  
+    }
+
+    if(!name){
+      reset()
+      return
+    }
 
     const getGifs = async () => {
 
@@ -48,7 +68,9 @@ function App() {
 
       } catch (error) {
 
-        console.error(error)
+        setError(true)
+
+        setMessage('Somethings was wron, please search again...')
           
       }
 
@@ -64,9 +86,9 @@ function App() {
 
 }, [name, currentPage])
 
-  const showBackButton=currentPage === 0 || name === ''
+  const showBackButton = currentPage === 0 || name === ''
 
-  const showNextButton=currentPage === totalPages || name === ''
+  const showNextButton = currentPage === totalPages || name === ''
 
   const backPage = () => {
     
@@ -94,7 +116,7 @@ function App() {
 
         <Form setName={setName}/>
         
-        {showPreloader ? <Preloader/> : <Gifs gifs={gifs} setGif={setGif}/>}
+        { showPreloader ? <Preloader/> : error ? <Error message={message}/> : <Gifs gifs={gifs} setGif={setGif}/>}
 
         <Paginator
           nextPage={nextPage} 
