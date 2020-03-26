@@ -1,5 +1,7 @@
 import React from 'react'
 
+import PropTypes from 'prop-types'
+
 const Gif = ({gif, showGif}) => {
 
     const {title, images : {original : {url}}} = gif
@@ -33,6 +35,14 @@ const Gif = ({gif, showGif}) => {
         </div>
 
     )
+
+}
+
+Gif.propTypes = {
+
+    gif : PropTypes.object.isRequired,
+
+    showGif : PropTypes.func.isRequired
 
 }
 

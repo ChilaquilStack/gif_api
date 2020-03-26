@@ -2,6 +2,8 @@ import React from 'react'
 
 import styles from './Form.module.css'
 
+import PropTypes from 'prop-types'
+
 const Form = ({setName}) => {
 
     const handleChange = (e) => {
@@ -43,5 +45,12 @@ const Form = ({setName}) => {
     )
 
 }
+
+Form.propTypes = {
+
+    setName : PropTypes.func.isRequired
+
+}
+
 
 export default Form

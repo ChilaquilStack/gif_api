@@ -1,5 +1,7 @@
 import React from 'react'
 
+import PropTypes from 'prop-types'
+
 const Paginator = ({backPage, nextPage, showBackButton, showNextButton}) => (
 
     <div className="row">
@@ -27,5 +29,17 @@ const Paginator = ({backPage, nextPage, showBackButton, showNextButton}) => (
     </div>
 
 )
+
+Paginator.propTypes = {
+
+    backPage : PropTypes.func.isRequired, 
+    
+    nextPage : PropTypes.func.isRequired,
+    
+    showBackButton : PropTypes.bool.isRequired,
+    
+    showNextButton : PropTypes.bool.isRequired
+
+}
 
 export default Paginator

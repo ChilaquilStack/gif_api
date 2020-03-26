@@ -84,6 +84,10 @@ function App() {
 
     }
 
+    const top = document.querySelector('.container')
+
+    top.scrollIntoView({behavior:'smooth'})
+
     if(name !== '')
       getGifs()
 

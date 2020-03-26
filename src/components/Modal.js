@@ -1,5 +1,7 @@
 import React from 'react'
 
+import PropTypes from 'prop-types'
+
 const Modal = ({gif, setGif}) =>  {
     
     const {title = 'no title', url = ''} = gif
@@ -12,7 +14,7 @@ const Modal = ({gif, setGif}) =>  {
     
     return(
 
-        <div id="modal" className="modal modal modal-fixed-footer">
+        <div id="modal" className="modal modal-fixed-footer">
         
             <div className="modal-content">
                 
@@ -58,6 +60,16 @@ const Modal = ({gif, setGif}) =>  {
     
         </div>
     )
+
+}
+
+
+Modal.propTypes = {
+
+    gif : PropTypes.object.isRequired,
+
+    setGif : PropTypes.func.isRequired
+
 }
 
 export default Modal
