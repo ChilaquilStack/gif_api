@@ -11,11 +11,10 @@ This app search gifs from an public api (giphi api)
 
 ## Deployment
 
-"""
+```
 - git clone https://github.com/Gizmo0oo/gif_api.git
 - cd /gif_api
 - npm install
 - npm start
 - open your browser and write localhost:3000
-
-"""
+```
