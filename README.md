@@ -16,6 +16,6 @@ This app search gifs from an public api (giphi api)
 - cd /gif_api
 - npm install
 - npm start
+<<<<<<< HEAD
 - open your browser and write localhost:3000
-
 """
