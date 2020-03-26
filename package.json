@@ -1,6 +1,5 @@
 {
   "name": "project",
-  "homepage": "https://www.edivillegas.com/api_gifs",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
