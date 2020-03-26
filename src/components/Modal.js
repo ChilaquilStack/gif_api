@@ -2,13 +2,13 @@ import React from 'react'
 
 import PropTypes from 'prop-types'
 
-const Modal = ({gif, setGif}) =>  {
+const Modal = ({gifItem, setGifItem}) =>  {
     
-    const {title = 'no title', url = ''} = gif
+    const {title = 'no title', url = ''} = gifItem
     
     const close = () => {
         
-        setGif({})
+        setGifItem({})
 
     }
     

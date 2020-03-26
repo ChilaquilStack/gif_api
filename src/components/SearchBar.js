@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styles from './Form.module.css'
+import styles from './SearchBar.module.css'
 
 import PropTypes from 'prop-types'
 
@@ -28,7 +28,7 @@ const Form = ({setName}) => {
                             type="text"
                             name="name"
                             onChange={handleChange}
-                            className={`${styles.btn_block} autocomplete`}
+                            className={`${styles.search__input} autocomplete`}
                             id="autocomplete-input"
                         />
 

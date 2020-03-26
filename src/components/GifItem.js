@@ -2,9 +2,9 @@ import React from 'react'
 
 import PropTypes from 'prop-types'
 
-const Gif = ({gif, showGif}) => {
+const Gif = ({gifItem, showGif}) => {
 
-    const {title, images : {original : {url}}} = gif
+    const {title, images : {downsized : {url}}} = gifItem
 
     const select = () => showGif({title, url})
 
@@ -16,8 +16,8 @@ const Gif = ({gif, showGif}) => {
 
                 <div className="card-image">
                             
-                    <img src={url} alt={title} width="250"/>
-                        
+                    <img src={url} alt={title} width="250" image/>
+                         
                 </div>
 
                 <div className="card-action center-align">

@@ -1,7 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react';
-import Gifs from './components/Gifs'
 import M from "materialize-css"
-import Form from './components/Form'
+import SearchBar from './components/SearchBar'
+import GifList from './components/GifList'
 import Modal from './components/Modal'
 import Error from './components/Error'
 import Header from './components/Header'
@@ -13,9 +13,9 @@ function App() {
 
   const gifsPerPage = 30
 
-  const [gif, setGif] = useState({})
+  const [gifItem, setGifItem] = useState({})
   
-  const [gifs, setGifs] = useState([])
+  const [gifList, setGifList] = useState([])
   
   const [name, setName] = useState('')
 
@@ -35,9 +35,9 @@ function App() {
 
     const reset = () => {
 
-      setGif({})
+      setGifItem({})
       
-      setGifs([])
+      setGifList([])
       
       setError(false)
       
@@ -68,7 +68,7 @@ function App() {
         
         const calcTotalPages = Math.ceil(pagination.total_count / gifsPerPage) 
         
-        setGifs(data)
+        setGifList(data)
 
         setTotalPages(calcTotalPages)
 
@@ -115,7 +115,7 @@ function App() {
 
   const showGif = (gif) => {
 
-    setGif(gif)
+    setGifItem(gif)
 
   }
 
@@ -127,12 +127,12 @@ function App() {
 
       <main className="container white">
 
-        <Modal gif={gif} setGif={setGif}/>
+        <Modal gifItem={gifItem} setGifItem={setGifItem}/>
 
-        <Form setName={setName}/>
+        <SearchBar setName={setName}/>
         
         { 
-          showPreloader ? <Preloader/> : error ? <Error message={message}/> : <Gifs gifs={gifs} showGif={showGif} /> 
+          showPreloader ? <Preloader/> : error ? <Error message={message}/> : <GifList gifList={gifList} showGif={showGif} /> 
         }
 
         <Paginator
