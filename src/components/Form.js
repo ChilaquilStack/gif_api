@@ -1,15 +1,10 @@
 import React from 'react'
 
 import styles from './Form.module.css'
-import M from "materialize-css";
 
 const Form = ({setName}) => {
 
     const handleChange = (e) => {
-
-        const  elems = document.querySelectorAll('.autocomplete');
-        
-        M.Autocomplete.init(elems);
         
         const {target : {value}} = e
         
@@ -35,7 +30,7 @@ const Form = ({setName}) => {
                             id="autocomplete-input"
                         />
 
-                        <label for="autocomplete-input">Please search a gif...</label>
+                        <label htmlFor="autocomplete-input">Please search a gif...</label>
 
                     </div>
 

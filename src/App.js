@@ -1,6 +1,8 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import Gifs from './components/Gifs'
+import M from "materialize-css"
 import Form from './components/Form'
+import Modal from './components/Modal'
 import Error from './components/Error'
 import Header from './components/Header'
 import Paginator from './components/Paginator'
@@ -18,7 +20,7 @@ function App() {
   const [name, setName] = useState('')
 
   const [error, setError] = useState(false)
-
+  
   const [message, setMessage] = useState('')
   
   const [totalPages, setTotalPages] = useState(0)
@@ -29,15 +31,19 @@ function App() {
 
   useEffect(() => {
 
+    M.Modal.init(document.getElementById('modal'))
+
     const reset = () => {
 
-      setCurrentPage(0)
-
-      setError(false)
-
-      setMessage('')
+      setGif({})
       
       setGifs([])
+      
+      setError(false)
+      
+      setMessage('')
+      
+      setCurrentPage(0)
   
     }
 
@@ -78,11 +84,8 @@ function App() {
 
     }
 
-    const top = document.querySelector('.container')
-
-    top.scrollIntoView({behavior: 'smooth'})
-
-    getGifs()
+    if(name !== '')
+      getGifs()
 
 }, [name, currentPage])
 
@@ -106,6 +109,12 @@ function App() {
   
   }
 
+  const showGif = (gif) => {
+
+    setGif(gif)
+
+  }
+
   return (
 
     <Fragment>
@@ -114,9 +123,13 @@ function App() {
 
       <main className="container white">
 
+        <Modal gif={gif} setGif={setGif}/>
+
         <Form setName={setName}/>
         
-        { showPreloader ? <Preloader/> : error ? <Error message={message}/> : <Gifs gifs={gifs} setGif={setGif}/>}
+        { 
+          showPreloader ? <Preloader/> : error ? <Error message={message}/> : <Gifs gifs={gifs} showGif={showGif} /> 
+        }
 
         <Paginator
           nextPage={nextPage} 

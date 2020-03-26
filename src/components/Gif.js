@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Gif = ({gif, setGif}) => {
+const Gif = ({gif, showGif}) => {
 
     const {title, images : {original : {url}}} = gif
 
-    const select = () => setGif(url)
+    const select = () => showGif({title, url})
 
     return (
         
@@ -13,11 +13,17 @@ const Gif = ({gif, setGif}) => {
             <div className="card">
 
                 <div className="card-image">
+                            
+                    <img src={url} alt={title} width="250"/>
+                        
+                </div>
 
-                    <a href="#!">
-                        
-                        <img src={url} alt={title}/>
-                        
+                <div className="card-action center-align">
+                    
+                    <a class="waves-effect waves-light btn modal-trigger" href="#modal" onClick={select}>
+
+                        View
+
                     </a>
                 
                 </div>
