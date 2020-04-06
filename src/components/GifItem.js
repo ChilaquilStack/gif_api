@@ -1,12 +1,14 @@
-import React from 'react'
+import React, {useContext} from 'react'
 
 import PropTypes from 'prop-types'
 
-const Gif = ({gifItem, showGif}) => {
+import {ModalContext} from '../context/ModalContext'
+
+const GifItem = ({gifItem}) => {
+    
+    const {setGif} = useContext(ModalContext)
 
     const {title, images : {downsized : {url}}} = gifItem
-
-    const select = () => showGif({title, url})
 
     return (
         
@@ -16,13 +18,13 @@ const Gif = ({gifItem, showGif}) => {
 
                 <div className="card-image">
                             
-                    <img src={url} alt={title} width="250" image/>
+                    <img src={url} alt={title} width="250"/>
                          
                 </div>
 
                 <div className="card-action center-align">
                     
-                    <a class="waves-effect waves-light btn modal-trigger" href="#modal" onClick={select}>
+                    <a className="waves-effect waves-light btn modal-trigger" href="#modal" onClick={() => setGif({title, url})}>
 
                         View
 
@@ -38,12 +40,10 @@ const Gif = ({gifItem, showGif}) => {
 
 }
 
-Gif.propTypes = {
+GifItem.propTypes = {
 
-    gif : PropTypes.object.isRequired,
-
-    showGif : PropTypes.func.isRequired
+    gifItem : PropTypes.object.isRequired
 
 }
 
-export default Gif
+export default GifItem

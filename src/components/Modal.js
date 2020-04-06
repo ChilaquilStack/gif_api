@@ -1,14 +1,15 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import {ModalContext} from '../context/ModalContext'
 
-import PropTypes from 'prop-types'
+const Modal = () =>  {
 
-const Modal = ({gifItem, setGifItem}) =>  {
+    const {gif, setGif} = useContext(ModalContext)
     
-    const {title = 'no title', url = ''} = gifItem
+    const {title = 'no title', url = ''} = gif
     
     const close = () => {
         
-        setGifItem({})
+        setGif({})
 
     }
     
@@ -20,19 +21,19 @@ const Modal = ({gifItem, setGifItem}) =>  {
                 
                 <h4 className="center-align">{title.toUpperCase()}</h4>
 
-                <div class="row">
+                <div className="row">
 
-                    <div class="col s12 m12">
+                    <div className="col s12 m12">
                         
-                        <div class="card">
+                        <div className="card">
                             
-                            <div class="card-image">
+                            <div className="card-image">
 
                                 <img className="materialboxed" data-caption="A picture of a way with a group of trees in a park" width="650" src={url} alt={title}/>
                             
                             </div>
                             
-                            <div class="card-action center-align">
+                            <div className="card-action center-align">
 
                                 <a href={url} rel="noopener noreferrer" target="_blank">
                                     Link
@@ -60,15 +61,6 @@ const Modal = ({gifItem, setGifItem}) =>  {
     
         </div>
     )
-
-}
-
-
-Modal.propTypes = {
-
-    gif : PropTypes.object.isRequired,
-
-    setGif : PropTypes.func.isRequired
 
 }
 

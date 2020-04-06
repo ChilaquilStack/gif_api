@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import M from "materialize-css"
 import SearchBar from './components/SearchBar'
 import GifList from './components/GifList'
@@ -8,12 +8,11 @@ import Header from './components/Header'
 import Paginator from './components/Paginator'
 import Preloader from './components/Preloader'
 import 'materialize-css/dist/css/materialize.min.css';
+import ModalProvider from './context/ModalContext'
 
 function App() {
-
+  
   const gifsPerPage = 30
-
-  const [gifItem, setGifItem] = useState({})
   
   const [gifList, setGifList] = useState([])
   
@@ -34,8 +33,6 @@ function App() {
     M.Modal.init(document.getElementById('modal'))
 
     const reset = () => {
-
-      setGifItem({})
       
       setGifList([])
       
@@ -113,26 +110,20 @@ function App() {
   
   }
 
-  const showGif = (gif) => {
-
-    setGifItem(gif)
-
-  }
-
   return (
 
-    <Fragment>
+    <ModalProvider>
 
       <Header title="Search Gifs"/>
 
       <main className="container white">
 
-        <Modal gifItem={gifItem} setGifItem={setGifItem}/>
+        <Modal/>
 
         <SearchBar setName={setName}/>
         
         { 
-          showPreloader ? <Preloader/> : error ? <Error message={message}/> : <GifList gifList={gifList} showGif={showGif} /> 
+          showPreloader ? <Preloader/> : error ? <Error message={message}/> : <GifList gifList={gifList}/> 
         }
 
         <Paginator
@@ -144,7 +135,7 @@ function App() {
 
       </main>
 
-    </Fragment>
+    </ModalProvider>
 
   )
 

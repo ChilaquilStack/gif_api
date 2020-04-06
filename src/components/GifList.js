@@ -4,9 +4,9 @@ import GifItem from './GifItem'
 
 import PropTypes from 'prop-types'
 
-const Gifs = ({gifList, showGif}) => {
+const GifsList = ({gifList}) => {
 
-    const gifListComponent = gifList.map(gif => <GifItem gifItem={gif} key={gif.id} showGif={showGif}/>)
+    const gifListComponent = gifList.map(gif => <GifItem gifItem={gif} key={gif.id}/>)
     
     return(
         
@@ -18,12 +18,10 @@ const Gifs = ({gifList, showGif}) => {
     )
 }
 
-Gifs.propTypes = {
+GifsList.propTypes = {
 
-    gifs : PropTypes.array.isRequired,
-
-    showGif : PropTypes.func.isRequired
+    gifList : PropTypes.array.isRequired
 
 }
 
-export default Gifs
+export default GifsList
